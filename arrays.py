@@ -1,17 +1,14 @@
 input_array = [1, 7, 4, 5, 200, 200, 200, 0, 9, 9, 9, 200,11, -66, 8]
 target = 9
 
-# # TODO SCENARIOS ould you like a slightly harder challenge next? Something like:
-# Return all even numbers in a new list
 # Count how many numbers are greater than a threshold
+# A list of numbers: [3, 7, 1, 9, 5, 12, 4]
+# A threshold value: 6
+# In this example, you would check each number to see if it’s greater than 6.
+
 # Return the index of the largest number
 
-#Initializing max_item with the first element
-#Looping through all elements 
-#Comparing each current_item to max_item 
-#Updating max_item when needed 
-# Returning the final max_item 
-
+# Find max from array
 def find_largest_from_array(array):
     max_item = array[0]
     for i in range(len(array)):
@@ -40,23 +37,24 @@ def count_the_even_numbers(array):
             even_count +=1
     return even_count
 
+# Remove duplicates
 def remove_duplicates(array):
     array = set(array)
     return array
 
-# # def remove_duplicates2(array):
-#     print(array)
-#     #Hint: Loop through the array and add items to a new list only if they haven’t appeared before.
-#     seen = {}
-#     # current_item = array[0]
-#     seen[array[0]] = 1
-#     for i in range(1, len(array)):
-#         if array[i] not in seen:
-#             seen[array[i]] = 1
-#         else:
-#             seen[array[i]] += 1
-#         i += 1
-#     return seen
+def remove_duplicates2(array):
+    print(array)
+    #Hint: Loop through the array and add items to a new list only if they haven’t appeared before.
+    seen = {}
+    # current_item = array[0]
+    seen[array[0]] = 1
+    for i in range(1, len(array)):
+        if array[i] not in seen:
+            seen[array[i]] = 1
+        else:
+            seen[array[i]] += 1
+        i += 1
+    return seen
 
 def count_occurrences(array, target: int):
     print(array, target)
