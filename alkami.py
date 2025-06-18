@@ -39,37 +39,30 @@ def reverse_string():
     denem = 'denem'
     return denem[::-1]
 
-# this creates a new array.
-def reverse_string_2point(str):
-    v = list(str)
-    i = len(v) - 1
-    newStr = []
-    while i >= 0:
-        newStr.append(v[i])
-        i -= 1
-
-    return "".join(newStr)
-
-# print(reverse_string_2point('denem'))
-
 # the idea is to have left of the string less than right, 
 # and keep swapping O(1) space, O(n) with while loop
-def reverse_string_inplace(str):
-    arr = list(str)
+def reverse_string_inplace(s):
+    print(f'reversing string')
+    s = list(s)
+    #first letter on the left
     left = 0
-    right = len(arr) - 1
-    temp = ""
+    #first letter on the right
+    right = len(s) - 1
+    print(left, right)
 
     while (left < right):
-        temp = arr[left]
-        arr[left] = arr[right]
-        arr[right] = temp
+        print(f'left {left}, right {right}')
+        #swap the positions of string while left < right
+        s[right], s[left] = s[left], s[right]
+        print(f's is now {s}')
         left += 1
         right -= 1
-    
-    return "".join(arr)
 
-# print(reverse_string_inplace('dinosaur'))
+    print(s)
+    
+    return "".join(s)
+   
+print(reverse_string_inplace('dinosaur'))
 
 
 # Valid Palindrome – Check if a string is a palindrome (ignoring non-alphanumeric characters and case).
@@ -125,25 +118,21 @@ def remove_vowels(s):
 def first_unique_char(s):
     seen = {}
     for i in range(len(s)):
-        print(f's[{i}] -> {s[i]}')
         if s[i] not in seen:
             seen[s[i]] = 1
         else:
             seen[s[i]] += 1
 
-    print(seen)
     for i in range(len(s)):
         if seen[s[i]] == 1:
             return i
-
     return -1
 
-print(first_unique_char('yarrayerring'))
-print(first_unique_char('aabbcc'))
+# print(first_unique_char('yarrayerring'))
+# print(first_unique_char('aabbcc'))
 
 
 # Anagram Check – Determine if two strings are anagrams of each other.
-
 def check_anagram(first, second): 
     # O(nlogn) due to sort for long strings
     if sorted(first) == sorted(second):
@@ -163,33 +152,58 @@ def check_anagram_dict(first, second):
         return False
     count = {}
 
+    #initialize or increase each occurrence
     for i in range(len(first)):
         if first[i] not in count:
             count[first[i]] = 1
         else:
             count[first[i]] += 1
 
+    #if any letter not found is present not anagram
     for i in range(len(second)):
         if second[i] not in count:
             return False
         else:
+            #decrease occurrence
             count[second[i]] -= 1
 
+    # if any occurrence is more than 1, not an anagram
     for a in count.values():
         if a > 0:
             return False
         
     return True
                    
-print(check_anagram_dict('dude', 'dudr'))
+# print(check_anagram_dict('dude', 'dudr'))
 
 
 # Longest Common Prefix – Find the longest common prefix string among an array of strings. ["flower", "flow", "flight"]
-# You need to find the longest string prefix that is common to all the strings in the array.
-# 🔹 What is a "prefix"?
-# A prefix is the beginning of a word. For example
-# The prefix of "flight" could be "f", "fl", "fli", etc.
-# "fl" is a prefix of "flower", "flow", and "flight".
+# For each word in the list starting from the second:
+# Compare it to your current prefix
+# Find how many characters at the beginning are still the same
+# Trim prefix to only that matching part
+# If at any point prefix becomes an empty string, return "" right away
+def common_longest_prefix():
+    a = ["flour","flow", "flower", "flo", "flowering"]
+    if not a:
+        return ""
+    
+    prefix = a[0]
+
+    for i in range(1, len(a)):
+        #length of the prefix
+        j = 0
+        while j < len(prefix) and j < len(a[i]) and a[i][j] == prefix[j]:
+            j += 1
+
+        prefix = prefix[:j]
+        if prefix == "":
+            return ""
+       
+    return prefix
+
+# print(common_longest_prefix())
+
 
 # String to Integer (atoi) – Implement the atoi function to convert a string to an integer.
 
