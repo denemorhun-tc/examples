@@ -149,24 +149,72 @@ def valid_palindrome(string):
 
     return True
 
-print(valid_palindrome('yarrak'))
+# print(valid_palindrome('yarrak'))
     
-
 '''✅ 7. Merge Sorted Arrays (Easy)
 Given two sorted arrays nums1 and nums2, merge nums2 into nums1 as one sorted array.
-⏱️ Uses: while loop, edge cases, pointers.
+⏱️ Uses: while loop, edge cases, pointers.'''
 
-✅ 8. Remove Element (Easy)
+'''✅ 8. Remove Element (Easy)
 Given an array nums and a value val, remove all instances of that value in-place and return the new length.
-⏱️ Uses: while loop or for loop with skipping logic and boundaries.
+⏱️ Uses: while loop or for loop with skipping logic and boundaries.'''
+# def remove_element(target):
+#     arr = [12, 5, 3, 4, 5, 6, 0, 99, 33]
 
-✅ 9. Find the Index of the First Occurrence in a String (Easy)
+#     i = 0
+#     while i < len(arr):
+
+'''✅ 9. Find the Index of the First Occurrence in a String (Easy)
 Implement strStr() to find the first occurrence of needle in haystack. Return the index or -1.
-⏱️ Uses: boundary check in while/for, substring matching.
+⏱️ Uses: boundary check in while/for, substring matching. '''
 
-✅ 10. Maximum Consecutive Ones (Easy)
-Given a binary array, find the maximum number of consecutive 1s.
-⏱️ Uses: while loop to count consecutive 1s and reset on 0.
+def strStr(haystack: str, needle: str) -> int:
+    i= 0
+    slice = len(needle)-1
+    while i < len(haystack)-1:
+        if haystack[i] == needle[0]:
+            print(f'found a matching char')
+            print(f'haystack[i:i+slice] {haystack[i:i+slice]}')
+            if haystack[i:i+slice] == needle:
+                return i
+        i += 1
+    return -1
 
-'''
+print(strStr('denem', 'e'))
+
+'''Find the Index of First Negative Number
+Given a sorted array (may have negative and positive numbers), find the index of the first negative number using a while loop (with binary search).'''
+def find_index_of_last_negative_number():
+    arr = [1, 8, -4, 3, 3, 9, 0]
+    i = len(arr) - 1
+    while i >= 0:
+        if arr[i] < 0:
+            return i
+        i -= 1
+    return -1
+# print(find_index_of_last_negative_number())
+
+# Binary search  using left, right, and mid on sorted array
+def binary_search(target):
+    arr = [1, 3, 5, 6, 7, 9, 11, 99]
+    if target not in arr:
+        return -1
+    left, right = 0, len(arr)-1
+    while left <= right:
+        mid = (left + right) // 2
+        print(f'left = {left}, right = {right}, mid={mid}')
+        if target < arr[mid]:
+            right = mid - 1
+        elif target > arr[mid]:
+            left = mid + 1
+        else:
+            return mid
+    return -1
+# print(binary_search(99))
+
+# 10. Maximum Consecutive Ones (Easy)
+# Given a binary array, find the maximum number of consecutive 1s.
+# ⏱️ Uses: while loop to count consecutive 1s and reset on 0.
+
+
 
