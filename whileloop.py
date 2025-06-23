@@ -3,20 +3,25 @@
 Given a sorted array, remove the duplicates in-place so that each element appears only once and return the new length.
 ⏱️ Involves: while loop, two pointers, index boundaries.'''
 
-def remove_duplicates_return_length():
-    a = [1, 1, 2, 3, 4, 4, 5, 5]
-    # i is the fast index, j is the slow index
-    i, j = 0, 1
+def remove_duplicates_return_length() -> int:
+    arr = [1, 1, 2, 3, 4, 4, 5, 5]
+    i = 0
+    j = 1
 
-    while i < len(a) and j < len(a):
-        print(f'i={i} a[{i}] = {a[i]}, j={j} a[{j}] = {a[j]}')
-        if a[i] != a[j]:
-            a[i] = a[j]
-            j = i
+    while i < len(arr)-1:
+        if arr[i] != arr[i+1]:
+            # print(f'i={i}, j={j}, arr[{i}] = {arr[i]}, arr[{j}] = {arr[j]}')
+            arr[j] = arr[i+1]
+            j +=1 
+        # increment i always
         i += 1
+
+    for k in range(j, len(arr)):
+        arr[k] = 'x'  
+    # print('final array', arr)
     return j
 
-#print(remove_duplicates_return_length())
+# print(remove_duplicates_return_length())
 
 def reverse_array():
     arr = [3, 5, 2, 9]
@@ -72,29 +77,31 @@ def check_if_sorted_ascending(arr):
 arr = [0, 2, 4, 5, 6, 7, 8, 9]
 arr2 = [9, 4, 3, 8, 1]
 
-print(check_if_sorted_ascending(arr))
-print(check_if_sorted_ascending(arr2))
+# print(check_if_sorted_ascending(arr))
+# print(check_if_sorted_ascending(arr2))
 
 '''
 ✅ 2. Move Zeroes (Easy)
 Given an array nums, move all 0's to the end while maintaining the relative order of the non-zero elements.
 ⏱️ Involves: while loop (optional), index checks, swapping.
 '''
-
 def move_zeroes(arr):
-    i = 0 #write pointer
-    j = 0 #read pointer
-    while j < len(arr):
-        print(arr)
-        if arr[j] != 0:
-            arr[i] = arr[j]
-            # increment write pointer, where the next non-zero element should go
-            i += 1
-        j += 1
-    for replace in range(i, len(arr)):
-        arr[replace] = 0
-    return arr
+    i = 0 #read pointer, always increment
+    j = 0 #write pointer
 
+    while i < len(arr):
+        if arr[i] != 0:
+            arr[j] = arr[i]
+            # only increment j when not equal to target
+            j += 1
+
+        i += 1
+
+    for k in range(j, len(arr)):
+        arr[k] = 0
+
+    return arr
+  
 # print(move_zeroes([0, 0, 9, 8, 0, 4, 0 ,3, 0]))
 
 '''
@@ -157,42 +164,53 @@ Given two sorted arrays nums1 and nums2, merge nums2 into nums1 as one sorted ar
 
 '''✅ 8. Remove Element (Easy)
 Given an array nums and a value val, remove all instances of that value in-place and return the new length.
-⏱️ Uses: while loop or for loop with skipping logic and boundaries.'''
-# def remove_element(target):
-#     arr = [12, 5, 3, 4, 5, 6, 0, 99, 33]
+⏱️ Uses: while loop or for loop with skipping logic and boundaries. Keep the values if arr[i] is not '''
+def remove_element(target):
+    arr = [12, 3, 4, 4, 6, 0, 99, 33, 99, 33]
 
-#     i = 0
-#     while i < len(arr):
+    i = 0 #fast
+    j = 0 #slow
+
+    while i < len(arr):
+        if arr[i] != target:
+            arr[j] = arr[i]
+            j += 1
+        i += 1
+
+    return j
+
+print('Remove element', remove_element(4))
 
 '''✅ 9. Find the Index of the First Occurrence in a String (Easy)
 Implement strStr() to find the first occurrence of needle in haystack. Return the index or -1.
-⏱️ Uses: boundary check in while/for, substring matching. '''
-
+⏱️ Uses: boundary check in while/for, substring matching. “I loop through the haystack and check if the substring from the current index matches needle. To avoid out-of-bounds issues, I only loop while i <= len(haystack) - len(needle).” '''
 def strStr(haystack: str, needle: str) -> int:
-    i= 0
-    slice = len(needle)-1
-    while i < len(haystack)-1:
+    if needle == "":
+        return 0
+    i = 0
+    slice = len(needle)
+    while i < len(haystack):
         if haystack[i] == needle[0]:
-            print(f'found a matching char')
-            print(f'haystack[i:i+slice] {haystack[i:i+slice]}')
             if haystack[i:i+slice] == needle:
                 return i
         i += 1
     return -1
 
-print(strStr('denem', 'e'))
+# print(strStr('denem', 'em'))
 
-'''Find the Index of First Negative Number
+'''TODOFind the Index of First Negative Number
 Given a sorted array (may have negative and positive numbers), find the index of the first negative number using a while loop (with binary search).'''
+
 def find_index_of_last_negative_number():
     arr = [1, 8, -4, 3, 3, 9, 0]
-    i = len(arr) - 1
-    while i >= 0:
-        if arr[i] < 0:
-            return i
-        i -= 1
-    return -1
+
 # print(find_index_of_last_negative_number())
+
+
+
+
+
+
 
 # Binary search  using left, right, and mid on sorted array
 def binary_search(target):
@@ -202,7 +220,7 @@ def binary_search(target):
     left, right = 0, len(arr)-1
     while left <= right:
         mid = (left + right) // 2
-        print(f'left = {left}, right = {right}, mid={mid}')
+        # print(f'left = {left}, right = {right}, mid={mid}')
         if target < arr[mid]:
             right = mid - 1
         elif target > arr[mid]:
@@ -215,6 +233,34 @@ def binary_search(target):
 # 10. Maximum Consecutive Ones (Easy)
 # Given a binary array, find the maximum number of consecutive 1s.
 # ⏱️ Uses: while loop to count consecutive 1s and reset on 0.
+# if I see a 1, increase count
+# if I see a 0, and if greater than max_count, set max_count and reset count, After the loop, check once more if the final streak was the longest, incase it ends with 1.
 
+def max_consecutive_ones(arr):
 
+    i = 0
+    count = 0
+    max_count = 0
+    while i < len(arr):
+        print(f'count {count}, max_count {max_count}')
+        if arr[i] == 1:
+            count += 1
+        elif arr[i] == 0:
+            if (count > max_count):
+                max_count = count
+            count = 0
+        i += 1
 
+    # extra check one more time if input ends with 1
+    if (count > max_count):
+        max_count = count
+    return max_count
+
+arrx = [1, 1, 0, 1, 1, 1, 1, 1]
+print(max_consecutive_ones(arrx))
+ 
+'''Check if Array is Sorted and Rotated
+
+Find the Difference Between Element Sum and Digit Sum
+
+Replace Elements with Greatest Element on Right Side'''

@@ -226,4 +226,17 @@ def common_longest_prefix():
 
 # Missing Number – Given an array containing n distinct numbers from 0 to n, find the missing one.
 
-# These questions cover key concepts like iteration, hash maps, two-pointer techniques, and basic algorithm design, which are common in SDET/QA interviews.
+'''Problem: Valid Parentheses (Easy)
+Given a string s containing just the characters '(', ')', '{', '}', '[', and ']', determine if the input string is valid.
+
+✅ Valid means:
+Every opening bracket has a corresponding closing bracket.
+
+Brackets are closed in the correct order. To maintain order, we must use a stack.'''
+
+def check_paranthesis():
+    # parse array. If we see an opening paranthesis, insert into array.
+    # if we see closing paranthesis, pop array. Since this is a stack, it should keep order. 
+    # if length is 0, they match 
+
+    
