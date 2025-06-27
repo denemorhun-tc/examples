@@ -144,7 +144,7 @@ def move_even_numbers_to_front():
 
     return array
 
-print(move_even_numbers_to_front())
+# print(move_even_numbers_to_front())
 
 def separate_element(target):
     array = [0, 0, 0, 0, 0, 0, 0, 1]
@@ -172,13 +172,7 @@ def separate_element(target):
     return array
     # add another loop from j to end of array and insert 1
 
-print(separate_element(1))
-
-
-
-
-
-
+# print(separate_element(1))
     
 # Remove Duplicates from Sorted Array
 # Given a sorted array nums, remove the duplicates in-place such that each element appears only once. Return the new length of the array.
@@ -218,4 +212,56 @@ print(separate_element(1))
 # print(get_squares(input_array))
 # print(remove_negative(input_array))
 
+# 1. Check if an Array is a Palindrome #
+def check_palindrome(arr):
+    left = 0
+    right = len(arr)-1
+    while left <= right:
+        if arr[left] != arr[right]:
+            return False
+        else:
+            left += 1
+            right -= 1
 
+    return True
+
+# print(check_palindrome([1, 2, 5, 2, 1]))
+
+def reverse_integer(num) -> int:
+    digits = []
+
+    while num > 0:
+        digits.append(num % 10)
+        num = num // 10
+    
+    for d in digits:
+        
+
+
+
+
+
+
+print(reverse_integer(123455))
+
+
+
+'''5. Count Pairs with a Given Sum (Sorted Array)
+Problem:
+Count the number of pairs in a sorted array that add up to a specific target.
+
+Input: [1, 2, 3, 4, 5], target = 6
+Output: 2 (pairs: 1+5, 2+4)'''
+
+
+
+
+'''3. Find the First Pair That Sums to a Target (Sorted Array)
+Problem:
+Given a sorted array and a target sum, find the first pair that adds to the target.
+
+Input: [1, 2, 3, 4, 6], target = 7
+Output: (1, 6)
+
+Concept:
+Start one pointer at the beginning, one at the end. Adjust based on the sum.'''

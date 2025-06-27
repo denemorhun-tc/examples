@@ -1,5 +1,38 @@
 # String Manipulation Questions
 
+#Merge Strings Alternately
+# You are given two strings word1 and word2. Merge the strings by adding letters in alternating order, starting with word1. If a string is longer than the other, append the additional letters onto the end of the merged string. Use two pointers for this problem. 
+def merge_strs_alternatively(word1, word2) -> str:
+
+    # find the abs difference between strings, using index combine them. 
+        # get the shortest length from the two strings
+        # merge both based on the short index
+        # find which length of word > short length. The difference should be the remaining to add. 
+        # slice and append the longer strings remaining characters
+
+        short_length = min(len(word1), len(word2))
+        merge = []
+
+        for i in range(short_length):
+            merge.append(word1[i])
+            merge.append(word2[i])
+
+        if len(word1) > short_length:
+            merge.append(word1[short_length:])
+
+        if len(word2) > short_length:
+            merge.append(word2[short_length:])
+        
+        print(merge)
+
+        return "".join(merge)
+
+# print(merge_strs_alternatively('denem', 'orhun'))
+print(merge_strs_alternatively('seda', 'orhun'))
+
+
+
+
 # Implement strStr()
 # Return the index of the first occurrence of a substring in a string. If not found, return -1.
 
@@ -62,7 +95,7 @@ def reverse_string_inplace(s):
     
     return "".join(s)
    
-print(reverse_string_inplace('dinosaur'))
+# print(reverse_string_inplace('dinosaur'))
 
 
 # Valid Palindrome – Check if a string is a palindrome (ignoring non-alphanumeric characters and case).
@@ -226,17 +259,4 @@ def common_longest_prefix():
 
 # Missing Number – Given an array containing n distinct numbers from 0 to n, find the missing one.
 
-'''Problem: Valid Parentheses (Easy)
-Given a string s containing just the characters '(', ')', '{', '}', '[', and ']', determine if the input string is valid.
 
-✅ Valid means:
-Every opening bracket has a corresponding closing bracket.
-
-Brackets are closed in the correct order. To maintain order, we must use a stack.'''
-
-def check_paranthesis():
-    # parse array. If we see an opening paranthesis, insert into array.
-    # if we see closing paranthesis, pop array. Since this is a stack, it should keep order. 
-    # if length is 0, they match 
-
-    
