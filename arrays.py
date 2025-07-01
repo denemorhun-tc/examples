@@ -103,11 +103,10 @@ def move_non_zero_elements():
 def remove_ocurring_elements(val):
     # Problem: Remove all occurrences of val in-place from nums. Return the length of the new array.
     # Pattern: Two-pointer: overwrite valid elements to the front. One pointer (i) scans all values, and the other (j) overwrites only when a value ≠ val.
-    array = [1, 3, 3, 1, 3, 1, 1, 1, 1, 1, 3]
+    array = [1, 3, 3, 1, 3, 1, 1, 9, 8, 1, 1]
     # output shoudl be 3
     val = 1 
     j=0
-
     # loop through the array and see if equal to 1
     for i in range(len(array)):
         print(f'i {i} j {j}')
@@ -118,6 +117,24 @@ def remove_ocurring_elements(val):
             print(f'array[{i}], i->{i} {array[i]} array[{j}], j->{j} {array[j]}')
             j += 1
     return j
+
+
+    # def remove_occurrences_in_place(arr, value_to_remove):
+    #     write_index = 0
+
+    #     for read_index, value in enumerate(arr):
+    #         if value != value_to_remove:
+    #             arr[write_index] = value
+    #             write_index += 1
+
+    #     # Remove extra elements from the end
+    #     while len(arr) > write_index:
+    #         arr.pop()
+
+    #     return write_index  # New length
+    
+
+
 
 # Problem:
 # Given a list of numbers, move all even numbers to the front, preserving their relative order. Fill the rest with -1.
@@ -177,24 +194,24 @@ def separate_element(target):
 # Remove Duplicates from Sorted Array
 # Given a sorted array nums, remove the duplicates in-place such that each element appears only once. Return the new length of the array.
 # You must not use extra space; modify the input array in-place with O(1) extra memory.
-# def remove_duplicating_elements():
-#     array = [0, 1, 2,3, 4]
+def remove_duplicating_elements():
+    array = [0, 1, 2,3, 4]
 
-#     #i -> fast index
-#     #j -> slow index
-#     j = 1
-#     # loop through array if different, that's a unique number.
-#     for i in range(len(array)):
-#         print(f'fast index i array[{i}] with value {array[i]} vs slow index j array[{j}] with value {array[j]}')
-#         if array[i] != array[j]:
-#             print('we found a new unique value')
-#             # assigned the value of i to slow index and move j to next
-#             j += 1
-#             array[j] = array[i]
-#         print(f'j is {j} now')
+    #i -> fast index
+    #j -> slow index
+    j = 1
+    # loop through array if different, that's a unique number.
+    for i in range(len(array)):
+        print(f'fast index i array[{i}] with value {array[i]} vs slow index j array[{j}] with value {array[j]}')
+        if array[i] != array[j]:
+            print('we found a new unique value')
+            # assigned the value of i to slow index and move j to next
+            j += 1
+            array[j] = array[i]
+        print(f'j is {j} now')
 
-#         # the length of the array has only gone to the j
-#     return j
+        # the length of the array has only gone to the j
+    return j
 
 # print(remove_duplicating_elements())
 #print(remove_ocurring_elements(1))
@@ -227,23 +244,16 @@ def check_palindrome(arr):
 
 # print(check_palindrome([1, 2, 5, 2, 1]))
 
-def reverse_integer(num) -> int:
-    digits = []
-
-    while num > 0:
-        digits.append(num % 10)
-        num = num // 10
+def reverse_integer(n) -> int:
     
-    for d in digits:
-        
-
-
-
-
-
+    reversed_int = 0
+    while n > 0:
+        reversed_int = reversed_int*10 + n % 10
+        #removes last digit
+        n //=10
+    return reversed_int
 
 print(reverse_integer(123455))
-
 
 
 '''5. Count Pairs with a Given Sum (Sorted Array)
@@ -253,8 +263,33 @@ Count the number of pairs in a sorted array that add up to a specific target.
 Input: [1, 2, 3, 4, 5], target = 6
 Output: 2 (pairs: 1+5, 2+4)'''
 
+# use left, right and compare first with last, incrememt both. increase count.
+def count_pairs(arr, target):
+    
+    count = 0
+    left = 0
+    right = len(arr) - 1
+
+    while (left < right):
+        total = arr[left] + arr[right]
+        if (total == target):
+            count += 1
+            left +=1
+            right -= 1
+        elif (total < target):
+            left +=1
+        elif (total > target):
+            right -= 1
+
+    return count
+
+print(count_pairs([1, 2, 3, 4, 5], 7))
+print(count_pairs([1, 2, 3, 4, 5], 4))
 
 
+
+        
+        
 
 '''3. Find the First Pair That Sums to a Target (Sorted Array)
 Problem:
@@ -265,3 +300,5 @@ Output: (1, 6)
 
 Concept:
 Start one pointer at the beginning, one at the end. Adjust based on the sum.'''
+
+

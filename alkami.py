@@ -28,7 +28,7 @@ def merge_strs_alternatively(word1, word2) -> str:
         return "".join(merge)
 
 # print(merge_strs_alternatively('denem', 'orhun'))
-print(merge_strs_alternatively('seda', 'orhun'))
+# print(merge_strs_alternatively('seda', 'orhun'))
 
 
 
@@ -260,3 +260,15 @@ def common_longest_prefix():
 # Missing Number – Given an array containing n distinct numbers from 0 to n, find the missing one.
 
 
+def two_sum_brute_force():
+    arr= [2, 3, 4, 10, 14]
+    target = 17
+
+    for i in range(len(arr)):
+        for j in range(1, len(arr)):
+            if arr[i] + arr[j] == target:
+                return[i,j]
+            
+    return False
+
+print(two_sum_brute_force())
