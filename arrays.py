@@ -316,3 +316,36 @@ def buy_and_sell_stock(prices):
         return max_profit
 
 
+# String to Integer (atoi) – Implement the atoi function to convert a string to an integer.
+
+# Count and Say – Given a number n, generate the n-th term in the "count and say" sequence.
+
+# Array Manipulation Questions
+# Remove Duplicates from Sorted Array – Remove duplicates in-place and return the new length.
+
+# Two Sum – Find two numbers in an array that add up to a target value.
+
+# Best Time to Buy and Sell Stock – Find the maximum profit from buying and selling a stock (single transaction).
+def maxProfit(prices) -> int:
+        # first day
+        lowest_price_so_far = prices[0]
+        #no profit on first date
+        max_profit = 0
+        for price in prices:
+            #check prices everyday vs lowest price so far
+            if price < lowest_price_so_far:
+                lowest_price_so_far = price
+            profit = price - lowest_price_so_far
+            if profit > max_profit:
+                max_profit = profit
+        return max_profit
+
+# Move Zeroes – Move all zeroes to the end of an array while maintaining the order of non-zero elements.
+
+# Plus One – Given a number represented as an array of digits, increment it by one and return the result as an array.
+
+# Single Number – Find the number that appears only once in an array where every other number appears twice.
+
+# Intersection of Two Arrays – Return the intersection of two arrays (unique common elements).
+
+# Missing Number – Given an array containing n distinct numbers from 0 to n, find the missing one.

@@ -52,23 +52,55 @@ def strStr(haystack: str, needle: str) -> int:
 # Longest Common Prefix
 # Write a function to find the longest common prefix string amongst an array of strings.
 
-# Maximum Subarray (Kadane’s Algorithm)
-# Find the contiguous subarray (containing at least one number) which has the largest sum and return its sum.
-
-# Two Sum
-# Given an array of integers and a target, return the indices of the two numbers that add up to the target.
+# Maximum Subarray (Kadane) Find the contiguous subarray
+# Input: [-2,1,-3,4,-1,2,1,-5,4] -> [4,-1,2,1] has the largest sum = 6)
+#  1. Continue the current subarray (add current element to running sum)
+ #   2. Start a new subarray from current element
+def max_subarray_kadane(nums):
+    max_sum = nums[0]
+    current_sum = nums[0]
+    for i in range(1, len(nums)):
+        # Either extend existing subarray or start new one
+        current_sum = max(nums[i], current_sum + nums[i])
+        max_sum = max(max_sum, current_sum)
+    return max_sum
 
 # Move Zeroes
 # Move all 0's to the end of the array while maintaining the relative order of the non-zero elements.
-
-# Find All Numbers Disappeared in an Array
-# Given an array of integers where 1 ≤ a[i] ≤ n, find all the elements that don't appear in the array.
-
-# Remove Element
-# Given an array and a value, remove all instances of that value in-place and return the new length.
+def move_zeroes(arr):
+    i = 0 #read pointer, always increment
+    j = 0 #write pointer
+    while i < len(arr):
+        if arr[i] != 0:
+            arr[j] = arr[i]
+            # only increment j when not equal to target
+            j += 1
+        i += 1
+    for k in range(j, len(arr)):
+        arr[k] = 0
+    return arr
 
 # Merge Sorted Array
 # Given two sorted arrays, merge them into one sorted array in-place.
+def merge_sorted_array(a1, a2):
+
+
+
+
+
+
+# Find All Numbers Disappeared in an Array
+# Given an array of integers where 1 ≤ a[i] ≤ n, find all the elements that don't appear in the array.
+def find_missing(nums):
+    n = len(nums)
+    num_set = set(nums)
+    result = []
+    
+    for i in range(1, n + 1):
+        if i not in num_set:
+            result.append(i)
+    
+    return result
 
 
 # Reverse a String – Given a string, return the reversed string.
@@ -90,8 +122,6 @@ def reverse_string_inplace(s):
     return "".join(s)
 
 # Valid Palindrome – Check if a string is a palindrome (ignoring non-alphanumeric characters and case).
-#again try the left / right method, one pointer increasing other decreasing
-
 def check_valid_palindrome(s):
     arr = list(s)
     left = 0
@@ -102,9 +132,6 @@ def check_valid_palindrome(s):
         left += 1
         right -= 1
     return True
-
-
-        
 
 # Remove wovels, loop through each character, if vowel, skip
 def remove_vowels(s):
@@ -117,9 +144,6 @@ def remove_vowels(s):
     return "".join(redux_str)
 
 # First Unique Character – Given a string, find the first non-repeating character and return its index.
-# Count frequency of each character (collections.Counter or a dict)
-# Loop through string again, check which character has count 1
-# Return its index
 def first_unique_char(s):
     seen = {}
     for i in range(len(s)):
@@ -133,30 +157,10 @@ def first_unique_char(s):
             return i
     return -1
 
-# print(first_unique_char('yarrayerring'))
-# print(first_unique_char('aabbcc'))
-
-
-# Anagram Check – Determine if two strings are anagrams of each other.
-def check_anagram(first, second): 
-    # O(nlogn) due to sort for long strings
-    if sorted(first) == sorted(second):
-        return True
-    else:
-        return False
-assert(check_anagram('eren', 'nere')) == True
-
-#You build two separate loops for first and second that do the same thing. You can DRY (Don’t Repeat Yourself) by making a helper function to count frequencies or using one dictionary that adds counts for the first string and subtracts for the second.\What does work well is treating the counts like a stack of character frequencies:
-# Use a dictionary to increment counts for the first string
-# Then decrement counts for the second string
-# Finally check if all counts are zero
-
 def check_anagram_dict(first, second):
-
     if (len(first)) != len(second):
         return False
     count = {}
-
     #initialize or increase each occurrence
     for i in range(len(first)):
         if first[i] not in count:
@@ -217,11 +221,34 @@ def common_longest_prefix():
 # Array Manipulation Questions
 # Remove Duplicates from Sorted Array – Remove duplicates in-place and return the new length.
 
-# Two Sum – Find two numbers in an array that add up to a target value.
-
 # Best Time to Buy and Sell Stock – Find the maximum profit from buying and selling a stock (single transaction).
+def maxProfit(prices) -> int:
+        # first day
+        lowest_price_so_far = prices[0]
+        #no profit on first date
+        max_profit = 0
+        for price in prices:
+            #check prices everyday vs lowest price so far
+            if price < lowest_price_so_far:
+                lowest_price_so_far = price
+            profit = price - lowest_price_so_far
+            if profit > max_profit:
+                max_profit = profit
+        return max_profit
 
 # Move Zeroes – Move all zeroes to the end of an array while maintaining the order of non-zero elements.
+def move_zeroes(arr):
+    i = 0 #read pointer, always increment
+    j = 0 #write pointer
+    while i < len(arr):
+        if arr[i] != 0:
+            arr[j] = arr[i]
+            # only increment j when not equal to target
+            j += 1
+        i += 1
+    for k in range(j, len(arr)):
+        arr[k] = 0
+    return arr
 
 # Plus One – Given a number represented as an array of digits, increment it by one and return the result as an array.
 

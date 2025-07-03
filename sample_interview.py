@@ -8,3 +8,11 @@ You are given an array of strings strings, group together all strings[i] that be
 Example 1:
 Input: strings = ["abc","bcd","acef","xyz","az","ba","a","z"]
 Output: [["acef"],["a","z"],["abc","bcd","xyz"],["az","ba"]]'''
+
+# Anagram Check – Determine if two strings are anagrams of each other.
+def check_anagram(first, second): 
+    # O(nlogn) due to sort for long strings
+    if sorted(first) == sorted(second):
+        return True
+    else:
+        return False
