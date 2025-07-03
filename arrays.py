@@ -326,7 +326,7 @@ def buy_and_sell_stock(prices):
 # Two Sum – Find two numbers in an array that add up to a target value.
 
 # Best Time to Buy and Sell Stock – Find the maximum profit from buying and selling a stock (single transaction).
-def maxProfit(prices) -> int:
+def buy_sell_stock(prices) -> int:
         # first day
         lowest_price_so_far = prices[0]
         #no profit on first date
