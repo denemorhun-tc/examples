@@ -288,3 +288,23 @@ def groupAnagrams(strs):
                 seen[key].append(anag)
         return list(seen.values())
 
+
+def paranthesis_is_valid(s):
+    stack = []
+    opening = ('(', '{', '[')
+    closing = (')', '}', ']')
+    pairs = {')': '(', '}': '{', ']': '['}
+
+    for char in s:
+        if char in opening:
+            stack.append(char)
+        elif char in closing:
+            if not stack or stack[-1] != pairs[char]:
+                return False
+            stack.pop()
+    print(stack)
+    return not stack
+
+
+print(paranthesis_is_valid('(dafega)o[]]'))
+
