@@ -1,40 +1,44 @@
 # String Manipulation Questions
 
+'''✅ 8. Remove Element (Easy)
+Given an array nums and a value val, remove all instances of that value in-place and return the new length.
+⏱️ Uses: while loop or for loop with skipping logic and boundaries. Keep the values if arr[i] is not '''
+def remove_element(target):
+    i = 0 #fast
+    j = 0 #slow
+    while i < len(arr):
+        if arr[i] != target:
+            arr[j] = arr[i]
+            j += 1
+        i += 1
+    return j
+
 #Merge Strings Alternately
 # You are given two strings word1 and word2. Merge the strings by adding letters in alternating order, starting with word1. If a string is longer than the other, append the additional letters onto the end of the merged string. Use two pointers for this problem. 
 def merge_strs_alternatively(word1, word2) -> str:
-
-    # find the abs difference between strings, using index combine them. 
-        # get the shortest length from the two strings
-        # merge both based on the short index
-        # find which length of word > short length. The difference should be the remaining to add. 
-        # slice and append the longer strings remaining characters
-
         short_length = min(len(word1), len(word2))
         merge = []
-
         for i in range(short_length):
             merge.append(word1[i])
             merge.append(word2[i])
-
         if len(word1) > short_length:
             merge.append(word1[short_length:])
-
         if len(word2) > short_length:
             merge.append(word2[short_length:])
-        
-        print(merge)
-
         return "".join(merge)
 
-# print(merge_strs_alternatively('denem', 'orhun'))
-# print(merge_strs_alternatively('seda', 'orhun'))
-
-
-
-
-# Implement strStr()
-# Return the index of the first occurrence of a substring in a string. If not found, return -1.
+# strStr(): Return the index of the first occurrence of a substring in a string. If not found, return -1.
+def strStr(haystack: str, needle: str) -> int:
+    if needle == "":
+        return 0
+    i = 0
+    slice = len(needle)
+    while i < len(haystack):
+        if haystack[i] == needle[0]:
+            if haystack[i:i+slice] == needle:
+                return i
+        i += 1
+    return -1
 
 # Ransom Note
 # Given two strings ransomNote and magazine, return true if ransomNote can be constructed from magazine.
@@ -75,28 +79,15 @@ def reverse_string():
 # the idea is to have left of the string less than right, 
 # and keep swapping O(1) space, O(n) with while loop
 def reverse_string_inplace(s):
-    print(f'reversing string')
-    s = list(s)
-    #first letter on the left
     left = 0
-    #first letter on the right
     right = len(s) - 1
-    print(left, right)
 
     while (left < right):
-        print(f'left {left}, right {right}')
-        #swap the positions of string while left < right
         s[right], s[left] = s[left], s[right]
         print(f's is now {s}')
         left += 1
         right -= 1
-
-    print(s)
-    
     return "".join(s)
-   
-# print(reverse_string_inplace('dinosaur'))
-
 
 # Valid Palindrome – Check if a string is a palindrome (ignoring non-alphanumeric characters and case).
 #again try the left / right method, one pointer increasing other decreasing
@@ -104,33 +95,18 @@ def reverse_string_inplace(s):
 def check_valid_palindrome(s):
     arr = list(s)
     left = 0
-    if len(arr) == 0:
-        return True
-    if not arr:
-        return True
     right = len(arr) - 1
     while (left < right):
         if arr[left] != arr[right]:
             return False
         left += 1
         right -= 1
-
     return True
 
-assert check_valid_palindrome('madam') == True
-# print(check_valid_palindrome('madam'))
-assert check_valid_palindrome('denem') == False, 'returns false for non palindrome'
-# print(check_valid_palindrome('denem'))
-assert check_valid_palindrome("madam") == True
-assert check_valid_palindrome("racecar") == True
-assert check_valid_palindrome("ege") == True
-assert check_valid_palindrome("hello") == False
-assert check_valid_palindrome("") == True
-assert check_valid_palindrome("a") == True
+
         
 
 # Remove wovels, loop through each character, if vowel, skip
-s = 'denemsaurus'
 def remove_vowels(s):
     s = list(s)
     vowels = set("aeiouAEIOU")
@@ -138,11 +114,7 @@ def remove_vowels(s):
     for letter in s:
         if letter not in vowels:
             redux_str.append(letter)
-        
-    print(redux_str)
     return "".join(redux_str)
-
-# print(remove_vowels(s))
 
 # First Unique Character – Given a string, find the first non-repeating character and return its index.
 # Count frequency of each character (collections.Counter or a dict)
@@ -262,20 +234,15 @@ def common_longest_prefix():
 # Two sum
 def two_sum(nums, target):
         seen = {}
-
         # loop through nums
         # if target - num is present, you've found match. return i and the index of target - num. 
         # if not present, store it for future use. 
-        
         for i in range(len(nums)):
             if target - nums[i] in seen.keys():
                 return [seen[target - nums[i]], i]
             else:
                 seen[nums[i]] = i
-
         return None
-
-print(two_sum([1, 2, 3, 4, 5, 10], 15))
 
 # Group anagrams:
 def groupAnagrams(strs):
@@ -288,23 +255,33 @@ def groupAnagrams(strs):
                 seen[key].append(anag)
         return list(seen.values())
 
-
+#balance paranthesis
 def paranthesis_is_valid(s):
     stack = []
     opening = ('(', '{', '[')
     closing = (')', '}', ']')
     pairs = {')': '(', '}': '{', ']': '['}
-
     for char in s:
         if char in opening:
             stack.append(char)
         elif char in closing:
+            # must check to see if matching pair
             if not stack or stack[-1] != pairs[char]:
                 return False
             stack.pop()
-    print(stack)
     return not stack
 
 
-print(paranthesis_is_valid('(dafega)o[]]'))
+#group_strings- check diff between chars for key, group using dict
+def group_shifted_strings(strings):
+    groups = {}
+    for s in strings:
+        key = ""
+        for i in range(1, len(s)):
+            diff = (ord(s[i]) - ord(s[i - 1])) % 26
+            key += str(diff)  # just digits
+        if key not in groups:
+            groups[key] = []
+        groups[key].append(s)
+    return list(groups.values())
 

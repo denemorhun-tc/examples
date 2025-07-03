@@ -167,16 +167,13 @@ Given an array nums and a value val, remove all instances of that value in-place
 ⏱️ Uses: while loop or for loop with skipping logic and boundaries. Keep the values if arr[i] is not '''
 def remove_element(target):
     arr = [12, 3, 4, 4, 6, 0, 99, 33, 99, 33]
-
     i = 0 #fast
     j = 0 #slow
-
     while i < len(arr):
         if arr[i] != target:
             arr[j] = arr[i]
             j += 1
         i += 1
-
     return j
 
 print('Remove element', remove_element(4))
