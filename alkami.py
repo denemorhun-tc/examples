@@ -259,16 +259,32 @@ def common_longest_prefix():
 
 # Missing Number – Given an array containing n distinct numbers from 0 to n, find the missing one.
 
+# Two sum
+def two_sum(nums, target):
+        seen = {}
 
-def two_sum_brute_force():
-    arr= [2, 3, 4, 10, 14]
-    target = 17
+        # loop through nums
+        # if target - num is present, you've found match. return i and the index of target - num. 
+        # if not present, store it for future use. 
+        
+        for i in range(len(nums)):
+            if target - nums[i] in seen.keys():
+                return [seen[target - nums[i]], i]
+            else:
+                seen[nums[i]] = i
 
-    for i in range(len(arr)):
-        for j in range(1, len(arr)):
-            if arr[i] + arr[j] == target:
-                return[i,j]
-            
-    return False
+        return None
 
-print(two_sum_brute_force())
+print(two_sum([1, 2, 3, 4, 5, 10], 15))
+
+# Group anagrams:
+def groupAnagrams(strs):
+        seen = {}
+        for anag in strs:
+            key = tuple((sorted(anag)))
+            if key not in seen.keys():
+                seen[key] = [anag]
+            else:
+                seen[key].append(anag)
+        return list(seen.values())
+

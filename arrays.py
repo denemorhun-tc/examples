@@ -301,4 +301,18 @@ Output: (1, 6)
 Concept:
 Start one pointer at the beginning, one at the end. Adjust based on the sum.'''
 
+def buy_and_sell_stock(prices):
+ # first 
+        lowest_price_so_far = prices[0]
+        #no profit on first date
+        max_profit = 0
+        for price in prices:
+            #check prices everyday vs lowest price so far
+            if price < lowest_price_so_far:
+                lowest_price_so_far = price
+            profit = price - lowest_price_so_far
+            if profit > max_profit:
+                max_profit = profit
+        return max_profit
+
 
